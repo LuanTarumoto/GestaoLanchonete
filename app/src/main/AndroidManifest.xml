@@ -30,6 +30,12 @@
         <activity
             android:name=".NovaCategoriaActivity"
             android:parentActivityName=".GerenciarCategoriasActivity" />
+        <activity
+            android:name=".ConfiguracoesActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".SobreActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>

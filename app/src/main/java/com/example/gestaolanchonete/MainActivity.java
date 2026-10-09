@@ -59,13 +59,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new android.content.Intent(this, CadastroProdutoActivity.class));
             return true;
         } else if (id == R.id.action_configuracoes) {
-            // Lógica para abrir tela de Configurações será inserida aqui
+            startActivity(new android.content.Intent(this, ConfiguracoesActivity.class));
             return true;
         } else if (id == R.id.action_categorias) {
             startActivity(new android.content.Intent(this, GerenciarCategoriasActivity.class));
             return true;
         } else if (id == R.id.action_sobre) {
-            // Lógica para abrir tela Sobre será inserida aqui
+            startActivity(new android.content.Intent(this, SobreActivity.class));
             return true;
         }
 
