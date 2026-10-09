@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Controle de Catálogo</string>
+    <string name="menu_adicionar">Adicionar Produto</string>
+    <string name="menu_configuracoes">Configurações</string>
+    <string name="menu_categorias">Gerenciar Categorias</string>
+    <string name="menu_sobre">Sobre</string>
+</resources>
