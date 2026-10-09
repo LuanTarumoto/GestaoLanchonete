@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cadastro de Produto"
+            android:textColor="#333333"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Produto:"
+            android:textColor="#555555" />
+
+        <EditText
+            android:id="@+id/editNomeProduto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: Hambúrguer Artesanal"
+            android:inputType="textCapWords"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preço:"
+            android:textColor="#555555" />
+
+        <EditText
+            android:id="@+id/editPrecoProduto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ex: 15.50"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoria:"
+            android:textColor="#555555" />
+
+        <Spinner
+            android:id="@+id/spinnerCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data de Cadastro:"
+            android:textColor="#555555" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btnSelecionarData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecionar Data"
+                android:backgroundTint="#5E4B8C"
+                android:textColor="#FFFFFF"/>
+
+            <TextView
+                android:id="@+id/textDataSelecionada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Nenhuma data selecionada"
+                android:textSize="16sp"
+                android:textColor="#333333"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Situação no Estoque:"
+            android:textColor="#555555" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/radioDisponivel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disponível"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/radioEsgotado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Esgotado"/>
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/checkDestaque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Destacar este produto no cardápio"
+            android:layout_marginBottom="24dp"/>
+
+    </LinearLayout>
+</ScrollView>

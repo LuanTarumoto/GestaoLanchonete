@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_adicionar) {
-            // Lógica para abrir tela de Cadastro será inserida aqui
+            startActivity(new android.content.Intent(this, CadastroProdutoActivity.class));
             return true;
         } else if (id == R.id.action_configuracoes) {
             // Lógica para abrir tela de Configurações será inserida aqui
