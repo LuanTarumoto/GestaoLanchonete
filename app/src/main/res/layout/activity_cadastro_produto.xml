@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:hint="Ex: Hambúrguer Artesanal"
             android:textColor="?android:attr/textColorPrimary"
-            android:textColorHint="?android:attr/textColorSecondary"
+            android:textColorHint="?android:attr/textColorHint"
             android:inputType="textCapWords"
             android:layout_marginBottom="16dp" />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:hint="Ex: 15.50"
             android:textColor="?android:attr/textColorPrimary"
-            android:textColorHint="?android:attr/textColorSecondary"
+            android:textColorHint="?android:attr/textColorHint"
             android:inputType="numberDecimal"
             android:layout_marginBottom="16dp" />
 

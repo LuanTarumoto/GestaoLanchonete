@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF"
+    android:background="?android:attr/colorBackground"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingBottom="16dp"
@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Categoria:"
-        android:textColor="#333333"
+        android:textColor="?android:attr/textColorPrimary"
         android:textStyle="bold"
         android:textSize="18sp" />
 
@@ -22,8 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ex: Bebidas, Lanches"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textColorHint="?android:attr/textColorHint"
         android:inputType="textCapWords"
-        android:layout_marginTop="8dp"
-        android:textColor="#333333"
-        android:textColorHint="#999999"/>
+        android:layout_marginTop="8dp" />
 </LinearLayout>
