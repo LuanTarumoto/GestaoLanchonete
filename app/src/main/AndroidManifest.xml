@@ -24,6 +24,12 @@
         <activity
             android:name=".CadastroProdutoActivity"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".GerenciarCategoriasActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".NovaCategoriaActivity"
+            android:parentActivityName=".GerenciarCategoriasActivity" />
     </application>
 
 </manifest>

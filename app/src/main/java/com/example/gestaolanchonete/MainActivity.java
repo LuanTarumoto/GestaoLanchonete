@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             // Lógica para abrir tela de Configurações será inserida aqui
             return true;
         } else if (id == R.id.action_categorias) {
-            // Lógica para abrir tela de Categorias será inserida aqui
+            startActivity(new android.content.Intent(this, GerenciarCategoriasActivity.class));
             return true;
         } else if (id == R.id.action_sobre) {
             // Lógica para abrir tela Sobre será inserida aqui
