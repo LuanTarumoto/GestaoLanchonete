@@ -1,24 +1,74 @@
 package com.example.gestaolanchonete;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ListView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.gestaolanchonete.adapter.ProdutoAdapter;
+import com.example.gestaolanchonete.database.AppDatabase;
+import com.example.gestaolanchonete.model.Produto;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ListView listaCatalogo;
+    private AppDatabase db;
+    private ProdutoAdapter adapter;
+    private List<Produto> listaProdutos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        listaCatalogo = findViewById(R.id.listaCatalogo);
+        db = AppDatabase.getDatabase(this);
+
+        carregarProdutos();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Atualiza a lista sempre que o usuário voltar para a tela inicial
+        carregarProdutos();
+    }
+
+    private void carregarProdutos() {
+        listaProdutos = db.lanchoneteDao().listarProdutos();
+        adapter = new ProdutoAdapter(this, listaProdutos);
+        listaCatalogo.setAdapter(adapter);
+    }
+
+    // --- REQUISITO: Uso de Menu de Opções ---
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_adicionar) {
+            // Lógica para abrir tela de Cadastro será inserida aqui
+            return true;
+        } else if (id == R.id.action_configuracoes) {
+            // Lógica para abrir tela de Configurações será inserida aqui
+            return true;
+        } else if (id == R.id.action_categorias) {
+            // Lógica para abrir tela de Categorias será inserida aqui
+            return true;
+        } else if (id == R.id.action_sobre) {
+            // Lógica para abrir tela Sobre será inserida aqui
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
