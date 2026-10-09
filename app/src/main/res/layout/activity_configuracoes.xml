@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FAFAFA"
+    android:background="?android:attr/colorBackground"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:paddingBottom="16dp"
@@ -16,13 +16,13 @@
         android:text="Sugestão de Preenchimento"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#333333" />
+        android:textColor="?android:attr/textColorPrimary" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lembrar a última categoria usada ao adicionar um novo produto."
         android:layout_marginTop="8dp"
-        android:textColor="#666666"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp" />
 </LinearLayout>

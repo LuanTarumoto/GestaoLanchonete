@@ -4,13 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="#FAFAFA"
+    android:background="?android:attr/colorBackground"
     android:paddingStart="24dp"
     android:paddingEnd="24dp"
     android:paddingBottom="24dp"
     android:paddingTop="?attr/actionBarSize">
 
-    <!-- Imagem da logo adicionada aqui -->
     <ImageView
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -24,7 +23,7 @@
         android:text="Sobre o Aplicativo"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#333333"
+        android:textColor="?android:attr/textColorPrimary"
         android:layout_marginBottom="16dp" />
 
     <TextView
@@ -32,7 +31,7 @@
         android:layout_height="wrap_content"
         android:text="Este aplicativo foi desenvolvido como projeto da disciplina de Programação para Dispositivos Móveis. Ele permite o gerenciamento e cadastro de um catálogo de produtos para um restaurante, controlando itens, categorias e situação no estoque em tempo real."
         android:textAlignment="center"
-        android:textColor="#555555"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="16sp"
         android:layout_marginBottom="32dp" />
 
@@ -47,14 +46,14 @@
             android:text="Desenvolvido por:"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="#333333"
+            android:textColor="?android:attr/textColorPrimary"
             android:layout_marginBottom="8dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Luan Tarumoto de Macedo\nCurso: Engenharia da Computação\nE-mail: Luan.2002@alunos.utfpr.edu.br"
-            android:textColor="#555555"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="16sp"
             android:lineSpacingExtra="4dp" />
     </LinearLayout>
