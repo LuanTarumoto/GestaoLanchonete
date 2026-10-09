@@ -10,12 +10,17 @@ import android.widget.TextView;
 import com.example.gestaolanchonete.R;
 import com.example.gestaolanchonete.model.Produto;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 public class ProdutoAdapter extends ArrayAdapter<Produto> {
 
-    public ProdutoAdapter(Context context, List<Produto> produtos) {
+    private Map<Integer, String> mapaCategorias;
+
+    public ProdutoAdapter(Context context, List<Produto> produtos, Map<Integer, String> mapaCategorias) {
         super(context, 0, produtos);
+        this.mapaCategorias = mapaCategorias;
     }
 
     @Override
@@ -30,13 +35,21 @@ public class ProdutoAdapter extends ArrayAdapter<Produto> {
         TextView textDetalhes = convertView.findViewById(R.id.textDetalhesProduto);
         TextView textPreco = convertView.findViewById(R.id.textPrecoProduto);
 
-        // Preenche os dados no layout
         textNome.setText(produto.nome);
 
-        String status = produto.disponivel ? "Disponível" : "Esgotado";
-        String data = produto.dataCadastro != null ? produto.dataCadastro.toString() : "";
-        textDetalhes.setText("Cat ID: " + produto.categoriaId + " | " + status + " | " + data);
+        // Pega o nome da categoria no mapa ou exibe erro se não achar
+        String nomeCategoria = mapaCategorias.containsKey(produto.categoriaId) ? mapaCategorias.get(produto.categoriaId) : "Sem Categoria";
 
+        String status = produto.disponivel ? "Disponível" : "Esgotado";
+
+        // Formata a data com barras (dd/MM/yyyy)
+        String data = "";
+        if (produto.dataCadastro != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            data = produto.dataCadastro.format(formatter);
+        }
+
+        textDetalhes.setText(nomeCategoria + " | " + status + " | " + data);
         textPreco.setText(String.format("R$ %.2f", produto.preco));
 
         return convertView;

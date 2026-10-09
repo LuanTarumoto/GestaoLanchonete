@@ -40,7 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void carregarProdutos() {
         listaProdutos = db.lanchoneteDao().listarProdutos();
-        adapter = new ProdutoAdapter(this, listaProdutos);
+
+        // Busca a lista de categorias e monta um "dicionário" para cruzar os IDs com os Nomes
+        List<com.example.gestaolanchonete.model.Categoria> listaCategorias = db.lanchoneteDao().listarCategorias();
+        java.util.Map<Integer, String> mapaCategorias = new java.util.HashMap<>();
+        for (com.example.gestaolanchonete.model.Categoria cat : listaCategorias) {
+            mapaCategorias.put(cat.id, cat.nome);
+        }
+
+        // Envia os produtos e o mapa de categorias para o Adapter
+        adapter = new ProdutoAdapter(this, listaProdutos, mapaCategorias);
         listaCatalogo.setAdapter(adapter);
     }
 

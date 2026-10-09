@@ -3,17 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
     android:gravity="center_horizontal"
-    android:background="#FAFAFA">
+    android:background="#FAFAFA"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:paddingBottom="24dp"
+    android:paddingTop="?attr/actionBarSize">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Imagem da logo adicionada aqui -->
+    <ImageView
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="UTFPR"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        android:textColor="#333333"
+        android:src="@drawable/logo_utfpr"
+        android:adjustViewBounds="true"
         android:layout_marginBottom="24dp" />
 
     <TextView
