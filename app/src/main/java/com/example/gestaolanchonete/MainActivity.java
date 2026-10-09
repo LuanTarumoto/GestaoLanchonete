@@ -1,6 +1,7 @@
 package com.example.gestaolanchonete;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -8,13 +9,10 @@ import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.gestaolanchonete.adapter.ProdutoAdapter;
 import com.example.gestaolanchonete.database.AppDatabase;
 import com.example.gestaolanchonete.model.Produto;
-
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         listaCatalogo = findViewById(R.id.listaCatalogo);
         db = AppDatabase.getDatabase(this);
 
-        carregarProdutos();
-        configurarMenuContextual(); // Ativa a exclusão de produtos
+        configurarMenuContextual();
     }
 
     @Override
@@ -55,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         listaCatalogo.setAdapter(adapter);
     }
 
-    // --- Lógica de Exclusão (Menu Contextual) ---
     private void configurarMenuContextual() {
         listaCatalogo.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listaCatalogo.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
@@ -75,7 +71,29 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                if (item.getItemId() == R.id.action_deletar) {
+                if (item.getItemId() == R.id.action_editar) {
+                    if (listaCatalogo.getCheckedItemCount() == 1) {
+                        for (int i = 0; i < listaProdutos.size(); i++) {
+                            if (listaCatalogo.isItemChecked(i)) {
+                                Produto prod = listaProdutos.get(i);
+                                Intent intent = new Intent(MainActivity.this, CadastroProdutoActivity.class);
+                                intent.putExtra("id", prod.id);
+                                intent.putExtra("nome", prod.nome);
+                                intent.putExtra("preco", prod.preco);
+                                intent.putExtra("categoriaId", prod.categoriaId);
+                                intent.putExtra("data", prod.dataCadastro != null ? prod.dataCadastro.toString() : "");
+                                intent.putExtra("disponivel", prod.disponivel);
+                                intent.putExtra("destaque", prod.destaque);
+                                startActivity(intent);
+                                break;
+                            }
+                        }
+                        mode.finish();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Selecione apenas 1 produto para editar", Toast.LENGTH_SHORT).show();
+                    }
+                    return true;
+                } else if (item.getItemId() == R.id.action_deletar) {
                     new AlertDialog.Builder(MainActivity.this)
                             .setTitle("Excluir Produto")
                             .setMessage("Tem certeza? Esta ação removerá o produto permanentemente.")
@@ -86,11 +104,10 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                                 mode.finish();
-                                carregarProdutos(); // Recarrega a tela
+                                carregarProdutos();
                                 Toast.makeText(MainActivity.this, "Produto excluído!", Toast.LENGTH_SHORT).show();
                             })
-                            .setNegativeButton("Não", null)
-                            .show();
+                            .setNegativeButton("Não", null).show();
                     return true;
                 }
                 return false;
@@ -110,21 +127,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_adicionar) {
-            startActivity(new android.content.Intent(this, CadastroProdutoActivity.class));
+            startActivity(new Intent(this, CadastroProdutoActivity.class));
             return true;
         } else if (id == R.id.action_configuracoes) {
-            startActivity(new android.content.Intent(this, ConfiguracoesActivity.class));
+            startActivity(new Intent(this, ConfiguracoesActivity.class));
             return true;
         } else if (id == R.id.action_categorias) {
-            startActivity(new android.content.Intent(this, GerenciarCategoriasActivity.class));
+            startActivity(new Intent(this, GerenciarCategoriasActivity.class));
             return true;
         } else if (id == R.id.action_sobre) {
-            startActivity(new android.content.Intent(this, SobreActivity.class));
+            startActivity(new Intent(this, SobreActivity.class));
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -12,24 +12,31 @@ import com.example.gestaolanchonete.model.Categoria;
 public class NovaCategoriaActivity extends AppCompatActivity {
     private EditText editNomeCategoria;
     private AppDatabase db;
+    private int categoriaId = -1; // -1 significa que é um novo cadastro
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nova_categoria);
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Nova Categoria");
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
         editNomeCategoria = findViewById(R.id.editNomeCategoria);
         db = AppDatabase.getDatabase(this);
+
+        // Verifica se veio uma ordem de EDIÇÃO
+        if (getIntent().hasExtra("id")) {
+            categoriaId = getIntent().getIntExtra("id", -1);
+            editNomeCategoria.setText(getIntent().getStringExtra("nome"));
+        }
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(categoriaId == -1 ? "Nova Categoria" : "Editar Categoria");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_cadastro, menu); // Reutiliza o botão de salvar do produto
+        getMenuInflater().inflate(R.menu.menu_cadastro, menu);
         return true;
     }
 
@@ -44,8 +51,16 @@ public class NovaCategoriaActivity extends AppCompatActivity {
                 Toast.makeText(this, "Preencha o nome da categoria!", Toast.LENGTH_SHORT).show();
                 return true;
             }
-            db.lanchoneteDao().inserirCategoria(new Categoria(nome));
-            Toast.makeText(this, "Categoria salva!", Toast.LENGTH_SHORT).show();
+
+            Categoria cat = new Categoria(nome);
+            if (categoriaId != -1) {
+                cat.id = categoriaId;
+                db.lanchoneteDao().atualizarCategoria(cat);
+                Toast.makeText(this, "Categoria atualizada!", Toast.LENGTH_SHORT).show();
+            } else {
+                db.lanchoneteDao().inserirCategoria(cat);
+                Toast.makeText(this, "Categoria salva!", Toast.LENGTH_SHORT).show();
+            }
             finish();
             return true;
         }

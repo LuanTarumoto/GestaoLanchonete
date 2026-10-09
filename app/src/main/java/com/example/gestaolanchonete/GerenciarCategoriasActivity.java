@@ -19,7 +19,6 @@ public class GerenciarCategoriasActivity extends AppCompatActivity {
     private ListView listaCategorias;
     private AppDatabase db;
     private List<Categoria> categorias;
-    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +48,11 @@ public class GerenciarCategoriasActivity extends AppCompatActivity {
         for (int i = 0; i < categorias.size(); i++) {
             nomes[i] = categorias.get(i).nome;
         }
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomes);
+        // Utilizando o nosso novo layout escuro/claro
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.item_categoria, nomes);
         listaCategorias.setAdapter(adapter);
     }
 
-    // REQUISITOS: Menu de Ação Contextual (Segurar para apagar) e AlertDialog
     private void configurarMenuContextual() {
         listaCategorias.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
         listaCategorias.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
@@ -73,7 +72,23 @@ public class GerenciarCategoriasActivity extends AppCompatActivity {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                if (item.getItemId() == R.id.action_deletar) {
+                if (item.getItemId() == R.id.action_editar) {
+                    if (listaCategorias.getCheckedItemCount() == 1) {
+                        for (int i = 0; i < categorias.size(); i++) {
+                            if (listaCategorias.isItemChecked(i)) {
+                                Intent intent = new Intent(GerenciarCategoriasActivity.this, NovaCategoriaActivity.class);
+                                intent.putExtra("id", categorias.get(i).id);
+                                intent.putExtra("nome", categorias.get(i).nome);
+                                startActivity(intent);
+                                break;
+                            }
+                        }
+                        mode.finish();
+                    } else {
+                        Toast.makeText(GerenciarCategoriasActivity.this, "Selecione apenas 1 para editar", Toast.LENGTH_SHORT).show();
+                    }
+                    return true;
+                } else if (item.getItemId() == R.id.action_deletar) {
                     new AlertDialog.Builder(GerenciarCategoriasActivity.this)
                             .setTitle("Excluir Categoria")
                             .setMessage("Tem certeza? Esta ação removerá a categoria do banco de dados.")
@@ -87,8 +102,7 @@ public class GerenciarCategoriasActivity extends AppCompatActivity {
                                 carregarCategorias();
                                 Toast.makeText(GerenciarCategoriasActivity.this, "Excluído com sucesso", Toast.LENGTH_SHORT).show();
                             })
-                            .setNegativeButton("Não", null)
-                            .show();
+                            .setNegativeButton("Não", null).show();
                     return true;
                 }
                 return false;
